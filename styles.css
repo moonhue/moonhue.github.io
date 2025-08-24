@@ -1,0 +1,18 @@
+/* styles.css */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-rows: repeat(4, 1fr); */
+    width: 350px;
+    gap: 10px;
+}
+
+.item {
+    /* Add styling to see the items */
+    padding: 5px;
+}
+
+table {
+    min-width: 300px;
+}

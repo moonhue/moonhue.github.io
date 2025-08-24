@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="main.js"></script>
+</head>
+
+<body>
+    <h1>Henlo Wordl</h1>
+    <div class="container">
+        <div class="item"> <label for="offset-select">character affinity</label></div>
+        <div class="item"> <select id="offsetComboBox"></select> </div>
+        <div class="item"> <label for="target-select">target affinity</label> </div>
+        <div class="item"> <select id="targetComboBox"></select> </div>
+        <div class="item"> <label for="target-select">water </label> </div>
+        <div class="item"> <select id="waterComboBox"></select> </div>
+        <div class="item"> <label for="target-select">oven rarity </label> </div>
+        <div class="item"> <select id="ovenComboBox"></select> </div>
+        <div class="item"> <label for="target-select">cauldron rarity </label> </div>
+        <div class="item"> <select id="cauldronComboBox"></select> </div>
+    </div>
+
+    <div class="item">
+        <button id="recipeButton">create recipe</button>
+    </div>
+    <p id="result"></p>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Ingredient</th>
+                <th style="text-align: left;">State</th>
+                <th style="text-align: right;">Amount</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+
+</html>
