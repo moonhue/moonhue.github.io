@@ -16,3 +16,19 @@
 table {
     min-width: 300px;
 }
+
+#myTable {
+    border-collapse: collapse;
+    /* width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden; */
+    /* Ensures the rounded corners are applied */
+}
+
+#myTable thead {
+    /* This is the key part: applying a bottom border to the header */
+    border-bottom: 1px solid #000000;
+}
