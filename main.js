@@ -20,7 +20,6 @@ async function main() {
 
 
 function populateComboBox(comboBoxId, contentObject) {
-    console.log(contentObject);
     const comboBox = document.getElementById(comboBoxId);
     comboBox.innerHTML = '';
     Object.entries(contentObject).forEach(([textContent, value]) => {
