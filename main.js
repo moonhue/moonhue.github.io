@@ -86,11 +86,26 @@ function calcRecipe() {
 
 function addEventListeners() {
     const recipeButton = document.getElementById('recipeButton');
-    recipeButton.addEventListener('click', () => { calcRecipe() });
+    recipeButton.addEventListener('click', () => {
+        validateInput();
+        calcRecipe();
+    });
 
     document.getElementById('primaryGrainComboBox').addEventListener('change', () => { handleBulkChange() });
 }
 
+function validateInput() {
+    const weightSpinner = document.getElementById('weightInput');
+    const input = parseFloat(weightSpinner.value);
+    const min = parseFloat(weightSpinner.min);
+    const max = parseFloat(weightSpinner.max);
+
+    if (input < min) {
+        weightSpinner.value = min;
+    } else if (input > max) {
+        weightSpinner.value = max;
+    }
+}
 
 function writeTable(products, totalWeight) {
 
