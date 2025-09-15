@@ -88,7 +88,7 @@ function calcRecipe() {
     }
 
     let waterWeight = Math.floor(totalWeight * 2.4 / 100) / 10;
-    recipeList.push({ state: ((waterOption) ? 'salty' : 'regular'), name: 'Water', amount: waterWeight });
+    recipeList.push({ state: ((waterOption) ? 'salty' : 'regular'), name: 'Water', amount: waterWeight.toFixed(1)});
     writeTable(recipeList, totalWeight / 1000 + waterWeight);
 }
 
@@ -178,7 +178,7 @@ function writeTable(products, totalWeight) {
 
     const amountCell = document.createElement('td');
     amountCell.style.borderTop = '1px solid black';
-    amountCell.textContent = totalWeight;
+    amountCell.textContent = totalWeight.toFixed(1);
     amountCell.style.textAlign = 'right';
 
     const lineCell = document.createElement('td');
