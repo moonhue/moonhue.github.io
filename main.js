@@ -39,6 +39,12 @@ function handleBulkChange() {
 }
 
 function calcRecipe() {
+    // TODO: add handling of non numeric target Weight
+    if (false) {
+        clearTable();
+        alert("Valid input plz");
+        return;
+    }
     let characterOffset = parseInt(document.getElementById("offsetComboBox").value);
     let targetValue = parseInt(document.getElementById("targetComboBox").value);
     let targetWeight = parseFloat(document.getElementById("weightInput").value);
@@ -80,15 +86,18 @@ function calcRecipe() {
         recipeList.push({ state: ingredient_state, name: item.ingredient, amount: ingredient_count });
         totalWeight += item.weight * ingredient_count;
     }
-    recipeList.push({ state: ((waterOption) ? 'salty' : 'regular'), name: 'Water', amount: totalWeight * 2.4 / 1000 });
-    writeTable(recipeList, totalWeight * 3.4 / 1000);
+
+    let waterWeight = Math.floor(totalWeight * 2.4 / 100) / 10;
+    recipeList.push({ state: ((waterOption) ? 'salty' : 'regular'), name: 'Water', amount: waterWeight });
+    writeTable(recipeList, totalWeight / 1000 + waterWeight);
 }
 
 function addEventListeners() {
     const recipeButton = document.getElementById('recipeButton');
     recipeButton.addEventListener('click', () => {
-        validateInput();
-        calcRecipe();
+        if (validateInput()) {
+            calcRecipe();
+        }
     });
 
     document.getElementById('primaryGrainComboBox').addEventListener('change', () => { handleBulkChange() });
@@ -96,15 +105,29 @@ function addEventListeners() {
 
 function validateInput() {
     const weightSpinner = document.getElementById('weightInput');
-    const input = parseFloat(weightSpinner.value);
+    const input = parseFloat(weightSpinner.value.trim());
+    const isValidFloat = !isNaN(input) && isFinite(input);
     const min = parseFloat(weightSpinner.min);
     const max = parseFloat(weightSpinner.max);
+
+    if (!isValidFloat) {
+        alert("Enter a valid number for target weight");
+        weightSpinner.value = min;
+        return false;
+    }
+
 
     if (input < min) {
         weightSpinner.value = min;
     } else if (input > max) {
         weightSpinner.value = max;
     }
+    return true;
+}
+
+function clearTable() {
+    const tableBody = document.querySelector('#myTable tbody');
+    tableBody.innerHTML = '';
 }
 
 function writeTable(products, totalWeight) {
