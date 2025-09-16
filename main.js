@@ -1,5 +1,6 @@
 import { waterOptions, rarityOption, skillOptions, ingredientList, targetingList, bulkOption, grainAOption, grainBOption } from './constants.js';
 
+// TODO: make meat choice flexible
 const N = 138; // number of skills
 main();
 
@@ -55,8 +56,8 @@ function calcRecipe() {
     let secondaryBulk = document.getElementById('secondaryGrainComboBox').value;
     let grainA = (Object.keys(grainAOption).includes(primaryBulk)) ? primaryBulk : secondaryBulk;
     let grainB = (Object.keys(grainBOption).includes(primaryBulk)) ? primaryBulk : secondaryBulk;
-    let extra_grain = Math.ceil((targetWeight * 1000 / 3.4 - 8900) / 300);
-    let totalValue = 47 + characterOffset + waterOption + ovenOption + cauldronOption;
+    let extra_grain = Math.ceil((targetWeight * 1000 / 3.4 - 8900) / 300); // todo: compensate for the extra grain
+    let totalValue = 47 + characterOffset + waterOption + ovenOption + cauldronOption + extra_grain * (Object.keys(grainAOption).includes(primaryBulk) ? 23 : 25);
     let targetingData = targetingList[mod(targetValue - totalValue, N)];
     let totalWeight = 0;
 
@@ -88,7 +89,7 @@ function calcRecipe() {
     }
 
     let waterWeight = Math.floor(totalWeight * 2.4 / 100) / 10;
-    recipeList.push({ state: ((waterOption) ? 'salty' : 'regular'), name: 'Water', amount: waterWeight.toFixed(1)});
+    recipeList.push({ state: ((waterOption) ? 'salty' : 'regular'), name: 'Water', amount: waterWeight.toFixed(1) });
     writeTable(recipeList, totalWeight / 1000 + waterWeight);
 }
 
